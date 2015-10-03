@@ -7,19 +7,27 @@
 
 #include <iostream>
 #include <fstream>
-#include <list>
-#include <iterator>
+#include <vector>
+//#include <iterator>
+//#include <string.h>
 using namespace std;
 
 int main(int argc, char *argv[]) {
     freopen(argv[1], "r", stdin);
 	int i, j, temp, scanresult, n, k;
-	list<int> myList;
+	vector<int> myVector;
 	char ch;
 	string s;
 
 S:
-	myList.clear();
+//	for (list<int>::iterator it=myList.begin(); it != myList.end(); ++it) {
+//		cout << *it << ' ';
+//	}
+//	cout << endl;
+	
+	
+
+	myVector.clear();
 	i = 0;
 	scanresult = scanf("%i", &temp);
 	if (scanresult == 0) {
@@ -27,34 +35,44 @@ S:
 	}
 	while(scanresult == 1) {
 		++i;
-		myList.push_back(temp);
+		myVector.push_back(temp);
 		scanresult = scanf("%i", &temp);
 	}
 	
-	for (list<int>::iterator it=myList.begin(); it != myList.end(); ++it) {
-		cout << *it << ' ';
-	}
+//	for (list<int>::iterator it=myList.begin(); it != myList.end(); ++it) {
+//		cout << *it << ' ';
+//	}
+	
+//	for (j = 0; j < i; j++) {
+//		cout << myVector[j] << ' ';
+//	}
 	
 	scanresult = scanf("%c", &ch);
-	cout << ch;
+	//cout << ch << ' ';
 	
 M:
-	scanresult = scanf("%i-%i", &n, &k);
-	cout << '[' << scanresult << ']';
+	scanresult = scanf("%i%c", &temp, &ch);
 	if (scanresult == 2) {
-		cout << ' ' << n << '-' << k;
+		switch (ch) {
+			case '-':
+				n = temp;
+				goto M;
+			case ',':
+				k = temp;
+				//cout << n << '-' << k << ", ";
+				iter_swap(myVector.begin() + n, myVector.begin() + k);
+				goto M;
+			case '\n':
+				k = temp;
+				//cout << n << '-' << k << '\n';
+				iter_swap(myVector.begin() + n, myVector.begin() + k);
+				for (j = 0; j < i; j++) {
+					cout << myVector[j] << ' ';
+				}
+				cout << endl;
+				goto S;
+		}
 	}
-	
-	scanresult = scanf(", %i-%i", &n, &k);
-	cout << '[' << scanresult << ']';
-	if (scanresult == 2) {
-		cout << ' ' << n << '-' << k;
-	}
-	
-	
-	
-	cout << endl;
-	goto S;
 E:
 	return 0;
 }
