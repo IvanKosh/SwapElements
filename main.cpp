@@ -17,9 +17,14 @@ int main(int argc, char *argv[]) {
 	list<int> myList;
 	char ch;
 	string s;
-	
+
+S:
+	myList.clear();
 	i = 0;
 	scanresult = scanf("%i", &temp);
+	if (scanresult == 0) {
+		goto E;
+	}
 	while(scanresult == 1) {
 		++i;
 		myList.push_back(temp);
@@ -30,9 +35,26 @@ int main(int argc, char *argv[]) {
 		cout << *it << ' ';
 	}
 	
-	scanresult = scanf("%s", &s);
-	cout << scanresult;
+	scanresult = scanf("%c", &ch);
+	cout << ch;
+	
+M:
+	scanresult = scanf("%i-%i", &n, &k);
+	cout << '[' << scanresult << ']';
+	if (scanresult == 2) {
+		cout << ' ' << n << '-' << k;
+	}
+	
+	scanresult = scanf(", %i-%i", &n, &k);
+	cout << '[' << scanresult << ']';
+	if (scanresult == 2) {
+		cout << ' ' << n << '-' << k;
+	}
 	
 	
+	
+	cout << endl;
+	goto S;
+E:
 	return 0;
 }
